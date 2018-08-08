@@ -26,9 +26,9 @@ def int2bit(num, length):
     return bit
 
 
-def get_ip_address():
+def get_ip_address(addr):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
+    s.connect((addr, 80))
     return s.getsockname()[0]
 
 
@@ -127,7 +127,7 @@ def send(address, port, send_file, path, permission=0xFFFF, timeout=5, tries=10)
 # Create a scoket udp and bind using a interface conneted to internet using
 # a random port
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((get_ip_address(), 0))
+    sock.bind((get_ip_address(address), 0))
 
 # Open file and get permissions of file in case the user haven't set then.
     if (not(os.path.exists(send_file))):
